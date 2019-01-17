@@ -11,7 +11,6 @@ import { HomeComponent } from './landing/components/home/home.component';
 import { HeaderComponent } from './landing/components/home/header/header.component';
 import { FooterComponent } from './landing/components/home/footer/footer.component';
 import { BodyComponent } from './landing/components/home/body/body.component';
-import { MenuComponent } from './landing/components/home/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +23,6 @@ import { MenuComponent } from './landing/components/home/menu/menu.component';
     HeaderComponent,
     FooterComponent,
     BodyComponent,
-    MenuComponent
   ],
   imports: [
     BrowserModule,
