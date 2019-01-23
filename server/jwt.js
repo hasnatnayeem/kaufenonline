@@ -29,12 +29,12 @@ module.exports = function(key) {
     return {
         encode:(obj) => {
             var result = "";
-            var header = encodeBase64(stringify(alg));
+            var header = encodeBase64(stringify(alg)); // First part of token
             result += header + ".";
             var body = encodeBase64(stringify(obj));
-            result += body + ".";
+            result += body + "."; // Second part of token
 
-            var checkSum = generateChecksum(header,body);
+            var checkSum = generateChecksum(header,body); // Third part of token
             result += checkSum; 
             return result;
         },
