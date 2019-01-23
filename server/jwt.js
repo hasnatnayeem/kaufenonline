@@ -16,7 +16,7 @@ module.exports = function(key) {
         return JSON.stringify(obj);
     }
 
-    function checkSumGen(head, body) {
+    function generateChecksum(head, body) {
         var checkSumStr = head + "." + body; 
         var hash = crypto.createHmac('sha256',key);
         var checkSum = hash.update(checkSumStr)
@@ -34,7 +34,7 @@ module.exports = function(key) {
             var body = encodeBase64(stringify(obj));
             result += body + ".";
 
-            var checkSum = checkSumGen(header,body);
+            var checkSum = generateChecksum(header,body);
             result += checkSum; 
             return result;
         },
@@ -43,7 +43,7 @@ module.exports = function(key) {
             var head = jwtArr[0];
             var body = jwtArr[1];
             var hash = jwtArr[2];
-            var checkSum = checkSumGen(head,body); 
+            var checkSum = generateChecksum(head,body); 
 
             if(hash === checkSum) {
                 return JSON.parse(decodeBase64(body));
