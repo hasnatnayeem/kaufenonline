@@ -12,6 +12,7 @@ module.exports = function(key) {
     }
     
     function stringify(obj) {
+        // Turns object into plain text
         return JSON.stringify(obj);
     }
 
