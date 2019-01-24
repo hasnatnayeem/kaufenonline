@@ -93,6 +93,7 @@ export class CheckoutService {
    * @memberof CheckoutService
    */
   fetchCurrentOrder() {
+    return;
     return this.http.post<{ data: Order }>('api/v1/orders/current', {}).pipe(
       map(({ data: order }) => {
         this.setOrderTokenInLocalStorage(order.number);

@@ -28,6 +28,7 @@ export class ProfileDropdownComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
+    console.log(this.currentUser);
   }
 
   onOpenChange(data: boolean): void {

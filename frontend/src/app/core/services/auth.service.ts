@@ -154,15 +154,11 @@ export class AuthService {
    * @memberof AuthService
    */
   logout() {
-    return this.http.post('api/v1/logout', {}).pipe(
-      map((res: Response) => {
-        if (isPlatformBrowser(this.platformId)) {
-          localStorage.clear();
-        }
-        this.store.dispatch(this.actions.logoutSuccess());
-        return res;
-      })
-    );
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.clear();
+    }
+    this.store.dispatch(this.actions.logoutSuccess());
+    return;
   }
 
   /**
