@@ -22,16 +22,11 @@ connection.connect()
 
 app.post('/login', (req, res) => {
     let user = req.body;
-    console.log(user)
 
     connection.query('SELECT id, email, password, first_name, last_name FROM users WHERE email = ? AND status = 1', [user.email], function (err, rows, fields) {
         if (err) throw err
         if (!rows.length || !bcrypt.compareSync(user.password, rows[0].password)) {
-            res.status(401).json({
-                sucess: false,
-                token: null,
-                err: 'Email or password is incorrect'
-            });
+            res.status(401).json({ "errors": { "detail": "Email or password is incorrect" } });
             return;
         }
         else {
