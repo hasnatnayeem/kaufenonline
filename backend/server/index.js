@@ -59,8 +59,8 @@ app.post('/register', (req, res) => {
             return;
         }
         user.password = bcrypt.hashSync(user.password, saltRounds);
-        connection.query("INSERT INTO users (email, password, email, first_name, last_name) VALUES (?, ?, ?, ?, ?)",
-            [user.email, user.password, user.email, user.first_name, user.last_name], function (err, result) {
+        connection.query("INSERT INTO users (email, password, first_name, last_name) VALUES (?, ?, ?, ?)",
+            [user.email, user.password, user.first_name, user.last_name], function (err, result) {
                 if (err) throw err
                 
                 if (result) {
