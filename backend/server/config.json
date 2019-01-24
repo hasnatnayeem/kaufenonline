@@ -1,0 +1,8 @@
+{
+    "db" : {
+        "host"     : "35.200.224.144",
+        "user"     : "kaufenonline",
+        "password" : "kaufenonline",
+        "database" : "kaufen_online"
+    }
+}
