@@ -1,5 +1,4 @@
 import { CUSTOM_APP_DATA } from './app-data';
-import { CUSTOM_META_DATA } from './meta-data';
 
 export const CUSTOM_CONFIG = {
   // Add Your custom configs here
@@ -28,5 +27,4 @@ export const CUSTOM_CONFIG = {
   reviewsDisplayLimit: 5,
 
   ...CUSTOM_APP_DATA,
-  ...CUSTOM_META_DATA
 };

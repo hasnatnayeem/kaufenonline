@@ -63,8 +63,8 @@ export class AppComponent implements OnInit, OnDestroy {
             this.checkoutService.fetchCurrentOrder()
               .subscribe(_ => { },
                 _ => {
-                  localStorage.clear()
-                  this.store.dispatch(this.authAction.logoutSuccess())
+                  // localStorage.clear()
+                  // this.store.dispatch(this.authAction.logoutSuccess())
                 }
               )
           )

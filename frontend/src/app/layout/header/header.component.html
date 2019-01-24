@@ -16,7 +16,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
         <app-header-search></app-header-search>
-        <app-header-help-dropdown></app-header-help-dropdown>
+        <!-- <app-header-help-dropdown></app-header-help-dropdown> -->
         <app-profile-dropdown class="pr-2 border-left" [isAuthenticated]="isAuthenticated$ | async"></app-profile-dropdown>
         <app-header-cart class="pl-2 border-left" [totalCartItems]="totalCartItems$ | async"></app-header-cart>
       </div>
@@ -46,9 +46,9 @@
         <app-brand-menu-dropdown [brands]="brands$ | async "></app-brand-menu-dropdown>
         <div class="col text-right">
 
-          <button type="button" class="btn shippingbtn"> FREE 1-2 DAY SHIPPING OVER {{currency}}{{freeShippingAmount}}
+          <!-- <button type="button" class="btn shippingbtn"> FREE 1-2 DAY SHIPPING OVER {{currency}}{{freeShippingAmount}}
             <i class="fa ml-2 fa-truck" aria-hidden="true"></i>
-          </button>
+          </button> -->
         </div>
       </div>
     </div>
