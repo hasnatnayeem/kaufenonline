@@ -72,9 +72,10 @@ export class AuthService {
    * @memberof AuthService
    */
   register(data: User): Observable<User> {
-    const params = { data: { type: 'user', attributes: data } };
-    return this.http.post<{data: User}>('api/v1/register', params).pipe(
+    const params = data;
+    return this.http.post<{data: User}>('http://127.0.0.1:8080/register', params).pipe(
       map(({data: user}) => {
+        console.log(user);
         return user;
       }),
       tap(

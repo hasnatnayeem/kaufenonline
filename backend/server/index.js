@@ -26,7 +26,11 @@ app.post('/login', (req, res) => {
     connection.query('SELECT id, email, password, first_name, last_name FROM users WHERE email = ? AND status = 1', [user.email], function (err, rows, fields) {
         if (err) throw err
         if (!rows.length || !bcrypt.compareSync(user.password, rows[0].password)) {
-            res.status(401).json({ "errors": { "detail": "Email or password is incorrect" } });
+            res.status(401).json({ 
+                "errors": { 
+                    "detail": "Email or password is incorrect" 
+                } 
+            });
             return;
         }
         else {
@@ -55,10 +59,10 @@ app.post('/register', (req, res) => {
     connection.query('SELECT * FROM users WHERE email = ?', [user.email], function (err, rows, fields) {
         if (err) throw err
         if (rows.length == 1) {
-            res.json({
-                sucess: false,
-                err: "email_exists",
-                message: "Email already exists"
+            res.json({ 
+                "errors": { 
+                    "detail": "Email already exist" 
+                } 
             });
             return;
         }
@@ -66,20 +70,29 @@ app.post('/register', (req, res) => {
         connection.query("INSERT INTO users (email, password, first_name, last_name) VALUES (?, ?, ?, ?)",
             [user.email, user.password, user.first_name, user.last_name], function (err, result) {
                 if (err) throw err
-
+                // console.log(result)
                 if (result) {
-                    res.json({
-                        sucess: true,
-                        err: null,
-                        message: "Registered successfully"
-                    });
+                    res.json({  
+                        data: {  
+                           attributes: {  
+                              email: user.email,
+                              name: user.first_name + " " + user.last_name 
+                           },
+                           id: result.insertId,
+                           links: {  
+                              self: "/users/" + result.insertId
+                           },
+                           type: "user"
+                        },
+                     });
+
                     return;
                 }
                 else {
-                    res.status(401).json({
-                        sucess: false,
-                        token: null,
-                        err: 'An error occurred'
+                    res.status(401).json({ 
+                        "errors": { 
+                            "detail": "An error occurred" 
+                        } 
                     });
                     return;
                 }
