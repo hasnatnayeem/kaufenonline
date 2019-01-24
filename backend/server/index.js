@@ -23,24 +23,24 @@ connection.connect()
 app.post('/login', (req, res) => {
     let user = req.body;
 
-    connection.query('SELECT username, password, email, first_name, last_name, phone FROM users WHERE username = ? AND status = 1', [user.username], function (err, rows, fields) {
+    connection.query('SELECT email, password, first_name, last_name, phone FROM users WHERE email = ? AND status = 1', [user.email], function (err, rows, fields) {
         if (err) throw err
         if (!rows.length || !bcrypt.compareSync(user.password, rows[0].password)) {
             res.status(401).json({
                 sucess: false,
                 token: null,
-                err: 'Username or password is incorrect'
+                err: 'Email or password is incorrect'
             });
             return;
         }
         else {
             user = rows[0];
             delete user.password;
-            let token = jwt.encode({ id: user.id, username: user.username })
+            let token = jwt.encode({ id: user.id, email: user.email })
+            user.token = token;
             res.json({
                 sucess: true,
                 err: null,
-                token: token,
                 user: user
             });
             return;
@@ -52,19 +52,19 @@ app.post('/login', (req, res) => {
 
 app.post('/register', (req, res) => {
     var user = req.body;
-    connection.query('SELECT * FROM users WHERE username = ?', [user.username], function (err, rows, fields) {
+    connection.query('SELECT * FROM users WHERE email = ?', [user.email], function (err, rows, fields) {
         if (err) throw err
         if (rows.length == 1) {
             res.json({
                 sucess: false,
-                err: "username_exists",
-                message: "Username exists"
+                err: "email_exists",
+                message: "Email already exists"
             });
             return;
         }
         user.password = bcrypt.hashSync(user.password, saltRounds);
-        connection.query("INSERT INTO users (username, password, email, first_name, last_name) VALUES (?, ?, ?, ?, ?)",
-            [user.username, user.password, user.email, user.first_name, user.last_name], function (err, result) {
+        connection.query("INSERT INTO users (email, password, email, first_name, last_name) VALUES (?, ?, ?, ?, ?)",
+            [user.email, user.password, user.email, user.first_name, user.last_name], function (err, result) {
                 if (err) throw err
                 
                 if (result) {
