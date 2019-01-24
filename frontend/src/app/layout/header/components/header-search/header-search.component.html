@@ -1,0 +1,22 @@
+<form *ngIf="!isMobile">
+  <app-search-bar></app-search-bar>
+</form>
+<form
+  class="desktop-query form-inline  my-lg-0"
+  *ngIf="isMobile"
+  [ngClass]="{
+  'bg-white desktop-query-updated':isSearchopen }">
+  <a
+    class="desktop-submit"
+    [ngClass]="{
+    'themecolor':isSearchopen }">
+    <i
+      class="fa fa-search"
+      (click)="showsearch()"></i>
+  </a>
+  <div
+    *ngIf="isSearchopen"
+    class="searchinput">
+    <app-search-bar></app-search-bar>
+  </div>
+</form>
