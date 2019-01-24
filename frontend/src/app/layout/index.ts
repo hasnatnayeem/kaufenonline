@@ -1,7 +1,3 @@
-import { FooterQuickLinksComponent } from './footer/component/footer-quick-links/footer-quick-links.component';
-import { FooterSocialLinksComponent } from './footer/component/footer-social-links/footer-social-links.component';
-import { FooterContactInfoComponent } from './footer/component/footer-contact-info/footer-contact-info.component';
-
 // tslint:disable-next-line:max-line-length
 import { BrandLogoComponent } from './header/components/categories-menu-dropdown/categories-components/categories-details/brand-logo/brand-logo.component';
 import { BrandListComponent } from './header/components/brand-menu-dropdown/brand-componant/brand-list/brand-list.component';
@@ -45,9 +41,6 @@ import { LayoutEffects } from './effects/layout.effects';
     CategoriesListComponent,
     BrandListComponent,
     BrandLogoComponent,
-    FooterContactInfoComponent,
-    FooterSocialLinksComponent,
-    FooterQuickLinksComponent,
     CategoryMobileMenuComponent,
     // sub components
     ProfileDropdownComponent
