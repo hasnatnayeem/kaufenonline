@@ -21,22 +21,6 @@ export class AuthenticationEffects {
       map(() => this.authActions.loginSuccess())
     );
 
-  @Effect()
-  OAuthLogin: Observable<Action> = this.actions$
-    .pipe(
-      ofType(AuthActions.O_AUTH_LOGIN),
-      switchMap<Action & { payload: string }, string | User>(action => {
-        return this.authService.socialLogin(action.payload);
-      }),
-      filter(data => data !== null),
-      map(data => {
-        if (typeof data === typeof 'string') {
-          return this.authActions.noOp();
-        } else {
-          return this.authActions.loginSuccess();
-        }
-      })
-    );
 
   @Effect()
   AfterLogoutSuccess$: Observable<Action> = this.actions$

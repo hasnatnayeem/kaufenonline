@@ -201,25 +201,6 @@ export class AuthService {
     }
   }
 
-  /**
-   *
-   *
-   * @param {string} provider
-   * @returns
-   * @memberof AuthService
-   */
-  socialLogin(provider: string) {
-    return this.oAuthService.authenticate<User>(provider).pipe(
-      map(user => {
-        this.setTokenInLocalStorage(user, 'user');
-        return user;
-      }),
-      catchError(_ => {
-        this.toastrService.error('Social login failed', 'ERROR!');
-        return observableOf('Social login failed');
-      })
-    );
-  }
 
   getUserToken() {
     if (isPlatformBrowser(this.platformId)) {

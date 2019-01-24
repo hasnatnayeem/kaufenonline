@@ -95,7 +95,4 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.loginSubs) { this.loginSubs.unsubscribe(); }
   }
 
-  socialLogin(provider: string) {
-    this.store.dispatch(this.actions.oAuthLogin(provider));
-  }
 }

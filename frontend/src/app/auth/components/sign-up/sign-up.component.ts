@@ -107,7 +107,4 @@ export class SignUpComponent implements OnInit, OnDestroy {
     }
   }
 
-  socialLogin(provider: string) {
-    this.store.dispatch(this.actions.oAuthLogin(provider));
-  }
 }
