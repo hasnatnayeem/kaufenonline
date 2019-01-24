@@ -9,6 +9,11 @@ var app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.all('/*', function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
 
 var mysql = require('mysql')
 var connection = mysql.createConnection(config.db);
@@ -30,7 +35,7 @@ app.post('/login', (req, res) => {
         }
         else {
             user = rows[0];
-            delete user.password; 
+            delete user.password;
             let token = jwt.encode({ id: user.id, username: user.username })
             res.json({
                 sucess: true,
@@ -61,7 +66,7 @@ app.post('/register', (req, res) => {
         connection.query("INSERT INTO users (username, password, email, first_name, last_name) VALUES (?, ?, ?, ?, ?)",
             [user.username, user.password, user.email, user.first_name, user.last_name], function (err, result) {
                 if (err) throw err
-                console.log(result)
+                
                 if (result) {
                     res.json({
                         sucess: true,
