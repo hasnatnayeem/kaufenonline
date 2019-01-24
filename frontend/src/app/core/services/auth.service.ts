@@ -44,7 +44,7 @@ export class AuthService {
 
   login({ email, password }): Observable<User> {
     const params = { 'email': email, 'password': password };
-    return this.http.post<{data: User}>('http://127.0.0.1:8080/login', params).pipe(
+    return this.http.post<{data: User}>('login', params).pipe(
       map(({data: user}) => {
         console.log(user)
         this.setTokenInLocalStorage(user, 'user');
@@ -73,9 +73,9 @@ export class AuthService {
    */
   register(data: User): Observable<User> {
     const params = data;
-    return this.http.post<{data: User}>('http://127.0.0.1:8080/register', params).pipe(
+    return this.http.post<{data: User}>('register', params).pipe(
       map(({data: user}) => {
-        console.log(user);
+        // console.log(user);
         return user;
       }),
       tap(
