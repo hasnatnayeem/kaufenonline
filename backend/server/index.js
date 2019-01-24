@@ -23,7 +23,7 @@ connection.connect()
 app.post('/login', (req, res) => {
     let user = req.body;
 
-    connection.query('SELECT email, password, first_name, last_name, phone FROM users WHERE email = ? AND status = 1', [user.email], function (err, rows, fields) {
+    connection.query('SELECT id, email, password, first_name, last_name FROM users WHERE email = ? AND status = 1', [user.email], function (err, rows, fields) {
         if (err) throw err
         if (!rows.length || !bcrypt.compareSync(user.password, rows[0].password)) {
             res.status(401).json({
@@ -38,11 +38,7 @@ app.post('/login', (req, res) => {
             delete user.password;
             let token = jwt.encode({ id: user.id, email: user.email })
             user.token = token;
-            res.json({
-                sucess: true,
-                err: null,
-                user: user
-            });
+            res.json(user);
             return;
         }
 
