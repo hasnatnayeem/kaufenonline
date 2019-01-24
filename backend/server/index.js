@@ -105,7 +105,7 @@ app.post('/register', (req, res) => {
 });
 
 
-const PORT = 8080;
+const PORT = 8081;
 app.listen(PORT, () => {
     console.log(`Magic happens on port ${PORT}`);
 });
