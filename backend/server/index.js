@@ -9,9 +9,9 @@ var app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.all('/*', function (req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
@@ -22,6 +22,7 @@ connection.connect()
 
 app.post('/login', (req, res) => {
     let user = req.body;
+    console.log(user)
 
     connection.query('SELECT id, email, password, first_name, last_name FROM users WHERE email = ? AND status = 1', [user.email], function (err, rows, fields) {
         if (err) throw err
@@ -38,7 +39,15 @@ app.post('/login', (req, res) => {
             delete user.password;
             let token = jwt.encode({ id: user.id, email: user.email })
             user.token = token;
-            res.json(user);
+            res.json({
+                data: {
+                    attributes: user,
+                    id: user.id,
+                    type: "user"
+                }
+            }
+            );
+
             return;
         }
 
@@ -62,7 +71,7 @@ app.post('/register', (req, res) => {
         connection.query("INSERT INTO users (email, password, first_name, last_name) VALUES (?, ?, ?, ?)",
             [user.email, user.password, user.first_name, user.last_name], function (err, result) {
                 if (err) throw err
-                
+
                 if (result) {
                     res.json({
                         sucess: true,

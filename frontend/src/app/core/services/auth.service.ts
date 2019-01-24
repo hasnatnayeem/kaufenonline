@@ -43,9 +43,10 @@ export class AuthService {
    */
 
   login({ email, password }): Observable<User> {
-    const params = { data: { attributes: { 'email': email, 'password': password } } };
-    return this.http.post<{data: User}>('api/v1/login', params).pipe(
+    const params = { 'email': email, 'password': password };
+    return this.http.post<{data: User}>('http://127.0.0.1:8080/login', params).pipe(
       map(({data: user}) => {
+        console.log(user)
         this.setTokenInLocalStorage(user, 'user');
         this.store.dispatch(this.actions.getCurrentUserSuccess(JSON.parse(localStorage.getItem('user'))));
         this.store.dispatch(this.actions.loginSuccess())
@@ -173,13 +174,13 @@ export class AuthService {
   getTokenHeader(request: HttpRequest<any>): HttpHeaders {
     if (this.getUserToken()) {
       return new HttpHeaders({
-        'Content-Type': 'application/vnd.api+json',
+        'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.getUserToken()}`,
         'Accept': '*/*'
       });
     } else {
       return new HttpHeaders({
-        'Content-Type': 'application/vnd.api+json',
+        'Content-Type': 'application/json',
         'Accept': '*/*'
       });
     }
