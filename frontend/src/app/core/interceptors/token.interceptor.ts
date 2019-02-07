@@ -21,6 +21,7 @@ export class TokenInterceptor implements HttpInterceptor {
       headers: auth.getTokenHeader(request),
       url: this.fixUrl(request.url)
     });
+    console.log(clonedRequest);
 
     return next.handle(clonedRequest);
   }

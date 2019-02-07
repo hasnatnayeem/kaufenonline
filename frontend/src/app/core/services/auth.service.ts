@@ -44,7 +44,11 @@ export class AuthService {
 
   login({ email, password }): Observable<User> {
     const params = { 'email': email, 'password': password };
-    return this.http.post<{data: User}>('login', params).pipe (
+    let formData: FormData = new FormData(); 
+    formData.append('emailId', email); 
+    formData.append('password', password); 
+
+    return this.http.post<{data: User}>('login', formData).pipe (
       map(data => {
         console.log(data);
         this.setTokenInLocalStorage(data, 'user');
@@ -169,13 +173,13 @@ export class AuthService {
   getTokenHeader(request: HttpRequest<any>): HttpHeaders {
     if (this.getUserToken()) {
       return new HttpHeaders({
-        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.getUserToken()}`,
         'Accept': '*/*'
       });
     } else {
       return new HttpHeaders({
-        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/json',
         'Accept': '*/*'
       });
     }
