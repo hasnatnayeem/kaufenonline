@@ -44,7 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
         if (isPlatformBrowser(this.platformId)) {
           window.scrollTo(0, 0);
         }
-        this.addMetaInfo();
+        // this.addMetaInfo();
       });
 
     this.schema = {
@@ -84,7 +84,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.layoutState$ = this.store.select(getlayoutStateJS);
 
     this.addFaviconIcon();
-    this.addConstMetaInfo();
+    // this.addConstMetaInfo();
     this.initLayoutState();
   }
 
@@ -112,22 +112,22 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscriptionList$.forEach(sub$ => sub$.unsubscribe());
   }
 
-  private addMetaInfo() {
-    const metaInfo = environment.config.metaInfo;
-    this.meta.updateTag({ name: 'description', content: metaInfo.description });
-    this.meta.updateTag({ name: 'keywords', content: metaInfo.title });
-    this.meta.updateTag({ name: 'title', content: metaInfo.title });
-    this.meta.updateTag({ name: 'apple-mobile-web-app-title', content: environment.appName });
-    this.meta.updateTag({ property: 'og:description', content: metaInfo.description });
-    this.meta.updateTag({ property: 'og:url', content: environment.config.frontEndUrl });
-    this.meta.updateTag({ property: 'twitter:title', content: metaInfo.description });
-    this.metaTitle.setTitle(metaInfo.title);
-  }
+  // private addMetaInfo() {
+  //   const metaInfo = environment.config.metaInfo;
+  //   this.meta.updateTag({ name: 'description', content: metaInfo.description });
+  //   this.meta.updateTag({ name: 'keywords', content: metaInfo.title });
+  //   this.meta.updateTag({ name: 'title', content: metaInfo.title });
+  //   this.meta.updateTag({ name: 'apple-mobile-web-app-title', content: environment.appName });
+  //   this.meta.updateTag({ property: 'og:description', content: metaInfo.description });
+  //   this.meta.updateTag({ property: 'og:url', content: environment.config.frontEndUrl });
+  //   this.meta.updateTag({ property: 'twitter:title', content: metaInfo.description });
+  //   this.metaTitle.setTitle(metaInfo.title);
+  // }
 
-  private addConstMetaInfo() {
-    const metaInfo = environment.config.metaInfo;
-    this.meta.updateTag({ name: 'google-site-verification', content: metaInfo.googleSiteVerification })
-  }
+  // private addConstMetaInfo() {
+  //   const metaInfo = environment.config.metaInfo;
+  //   this.meta.updateTag({ name: 'google-site-verification', content: metaInfo.googleSiteVerification })
+  // }
 
   private initLayoutState() {
     const layoutState: LayoutState = {} as LayoutState;

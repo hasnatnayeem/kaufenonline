@@ -48,7 +48,7 @@ export class ProfileEmailComponent implements OnInit {
     this.userService.updateUser(params)
       .subscribe(success => {
         this.toastyService.success('Email Updated!', 'Success!');
-        this.authService.logout().subscribe();
+        // this.authService.logout().subscribe();
       }, error => {
         this.toastyService.error('Email could not be updated!', 'Error!');
       })

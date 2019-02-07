@@ -13,11 +13,11 @@ import { RatingCategory } from '../../core/models/rating_category';
 export class AuthenticationEffects {
 
   @Effect()
-  Authorized$: Observable<Action> = this.actions$
+  Authorized$ = this.actions$
     .pipe(
       ofType(AuthActions.AUTHORIZE),
       switchMap(() => this.authService.authorized()),
-      filter(data => data.error !== 'unauthenticated'),
+      filter(data => data == true),
       map(() => this.authActions.loginSuccess())
     );
 

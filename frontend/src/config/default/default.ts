@@ -1,7 +1,7 @@
 import { DEFAULT_APP_DATA } from './app-data';
 
 export const DEFAULT_CONFIG = {
-  prodApiEndpoint: 'https://aviastore.aviacomapi.com/',
+  prodApiEndpoint: 'http://35.200.224.144:8081/',
   // prodApiEndpoint: 'http://localhost:3000/',
   frontEndUrl: 'https://demo.aviacommerce.com/',
   appName: 'Kaufen Online',

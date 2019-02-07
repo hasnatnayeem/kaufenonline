@@ -82,9 +82,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(this.authActions.authorize())
-    this.store.dispatch(this.actions.getAllTaxonomies());
-    this.store.dispatch(this.actions.getBrands());
-    this.store.dispatch(this.authAction.getRatingCategories());
+    // this.store.dispatch(this.actions.getAllTaxonomies());
+    // this.store.dispatch(this.actions.getBrands());
+    // this.store.dispatch(this.authAction.getRatingCategories());
+    // this.isAuthenticated$ = this.store.select(getAuthStatus);
     this.isAuthenticated$ = this.store.select(getAuthStatus);
     this.taxonomies$ = this.store.select(getTaxonomies);
     this.brands$ = this.store.select(getBrands);

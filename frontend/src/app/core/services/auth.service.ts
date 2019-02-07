@@ -44,13 +44,13 @@ export class AuthService {
 
   login({ email, password }): Observable<User> {
     const params = { 'email': email, 'password': password };
-    return this.http.post<{data: User}>('login', params).pipe(
-      map(({data: user}) => {
-        console.log(user)
-        this.setTokenInLocalStorage(user, 'user');
+    return this.http.post<{data: User}>('login', params).pipe (
+      map(data => {
+        console.log(data);
+        this.setTokenInLocalStorage(data, 'user');
         this.store.dispatch(this.actions.getCurrentUserSuccess(JSON.parse(localStorage.getItem('user'))));
         this.store.dispatch(this.actions.loginSuccess())
-        return user;
+        return data;
       }),
       tap(
         _ => this.router.navigate(['/']),
@@ -142,9 +142,7 @@ export class AuthService {
    * @memberof AuthService
    */
   authorized(): Observable<any> {
-    return this.http
-      .get('api/v1/authenticated')
-      .pipe(catchError(error => of(error.error)));
+    return observableOf(this.getUserToken() != null);
   }
 
   /**

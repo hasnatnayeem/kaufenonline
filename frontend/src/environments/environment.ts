@@ -7,7 +7,7 @@ import { DEFAULT_CONFIG } from '../config/default/default';
 
 export const environment = {
   production: false,
-  apiEndpoint: 'http://localhost:8080/',
+  apiEndpoint: 'http://35.200.224.144:8090/api/v1/',
   appName: DEFAULT_CONFIG.appName,
   config: DEFAULT_CONFIG
 };
